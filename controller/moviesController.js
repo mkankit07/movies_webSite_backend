@@ -2,6 +2,7 @@ const movieModel = require("../model/MoviesModel");
 
 const createNewMovie = async (req, res) => {
   try {
+    console.log(req.tokenData);
     if (req.tokenData.isAdmin) {
       const movieData = await movieModel.create(req.body);
       return res.status(200).json({
@@ -10,7 +11,7 @@ const createNewMovie = async (req, res) => {
       });
     } else {
       return res.status(401).json({
-        message: "Unauthorized",
+        message: "you not allowed to create a new movie",
       });
     }
   } catch (err) {
@@ -95,7 +96,7 @@ const getRamdomMovie = async (req, res) => {
       ]);
     } else {
       movie = await movieModel.aggregate([
-        { $match: { isMovie: false } },
+        { $match: { isSeries: false } },
         { $sample: { size: 1 } },
       ]);
     }
