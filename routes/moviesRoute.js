@@ -7,6 +7,7 @@ router.post("/",AuthGuard,movieController.createNewMovie)
 router.put("/:id",AuthGuard,movieController.updateMovie)
 router.delete("/:id",AuthGuard,movieController.deleteMovie)
 router.get("/:id",movieController.getMovie)
-router.get("/random/movie",movieController.getRamdomMovie)
+router.get("/",movieController.getAllMovie)
+// router.get("/random/movie",movieController.getRamdomMovie)
 
 module.exports = router

@@ -113,4 +113,20 @@ const getRamdomMovie = async (req, res) => {
   }
 };
 
-module.exports ={createNewMovie,updateMovie,deleteMovie,getMovie,getRamdomMovie}
+const getAllMovie = async (req, res) => {
+  try {
+    const movieData = await movieModel.find();
+    return res.status(200).json({
+      message: "Movie found",
+      data: movieData.reverse(),
+      code: 200,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      message: err.message || "Internal Server Error",
+      code: 500,
+    });
+  }
+};
+
+module.exports ={createNewMovie,updateMovie,deleteMovie,getMovie,getRamdomMovie,getAllMovie}
